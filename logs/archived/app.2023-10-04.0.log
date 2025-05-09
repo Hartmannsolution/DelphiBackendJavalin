@@ -1,0 +1,3 @@
+00:03:24.665 [JettyServerThreadPool-39] log-level=ERROR dk.cphbusiness.rest.P06LoggingDemo key-value-pair: - XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX Hello World
+00:03:24.668 [JettyServerThreadPool-39] log-level=DEBUG dk.cphbusiness.rest.P06LoggingDemo key-value-pair: - YYYYYYYYYYYYYYYYYYYYYYYYYYYYYY Hello World
+11:51:03.813 [main] log-level=ERROR io.javalin.Javalin  Failed to start Javalin

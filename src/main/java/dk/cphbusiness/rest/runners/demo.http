@@ -1,0 +1,68 @@
+# Test MockTripRoutes API
+### Populate 10 trips with 3 guides
+GET {{url}}/populate/trips
+###
+
+###
+# Get all trips
+GET {{url}}/trips
+###
+# Get all guides
+GET {{url}}/guides
+###
+# Get all trips
+GET {{url}}/mock/trips
+#Authorization: Bearer {{token}}
+###
+# Get a specific trip by ID (replace {{tripId}} with actual UUID from a previous GET response)
+GET {{url}}/mock/trips/31410822-8df0-43e6-9be4-17b8ca361864
+###
+# Create a new trip
+POST {{url}}/mock/trips
+#Authorization: Bearer {{token}}
+
+{
+    "starttime": "2024-05-10T09:00:00",
+    "endtime": "2024-05-10T17:00:00",
+    "longitude": 12.34,
+    "latitude": 56.78,
+    "name": "Beach Day 22222222222222222222",
+    "price": 150.00,
+    "category": "BEACH"
+}
+###
+# Update an existing trip (replace {{tripId}} with actual UUID from a previous GET response)
+PUT {{url}}/mock/trips/{{tripId}}
+Authorization: Bearer {{token}}
+
+{
+    "startTime": "2024-06-15T10:00:00",
+    "endTime": "2024-06-15T18:00:00",
+    "longitude": 13.45,
+    "latitude": 57.89,
+    "name": "Updated City Tour",
+    "price": 180.00,
+    "category": "CITY",
+    "guide": {
+        "firstName": "Bob",
+        "lastName": "Smith",
+        "email": "bob@mail.com",
+        "phone": "87654321",
+        "yearsOfExperience": 5
+    }
+}
+###
+# Delete a trip by ID (replace {{tripId}} with actual UUID from a previous GET response)
+DELETE {{url}}/mock/trips/sdfsdfsdf
+#Authorization: Bearer {{token}}
+###
+# Add a guide to an existing trip (replace {{tripId}} with the UUID of the trip and {{guideId}} with the UUID of the guide)
+POST {{url}}/mock/trips/trip/7f912423-a1c1-4a43-aab6-62240aa7e228/guide/9dbcd0f3-2bf5-47d8-a0ba-91923f52900f
+#Authorization: Bearer {{token}}
+
+{
+    "firstName": "Charlie",
+    "lastName": "Brown",
+    "email": "charlie@mail.com",
+    "phone": "55555555",
+    "yearsOfExperience": 7

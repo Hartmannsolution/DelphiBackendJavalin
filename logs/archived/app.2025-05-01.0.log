@@ -1,0 +1,9 @@
+09:54:21.676 [main] log-level=ERROR o.t.d.DockerClientProviderStrategy  Could not find a valid Docker environment. Please check configuration. Attempted configurations were:
+	UnixSocketClientProviderStrategy: failed with exception InvalidConfigurationException (Could not find unix domain socket). Root cause NoSuchFileException (/var/run/docker.sock)As no valid configuration was found, execution cannot continue.
+See https://www.testcontainers.org/on_failure.html for more details.
+11:12:31.603 [main] log-level=ERROR o.t.d.DockerClientProviderStrategy  Could not find a valid Docker environment. Please check configuration. Attempted configurations were:
+As no valid configuration was found, execution cannot continue.
+See https://www.testcontainers.org/on_failure.html for more details.
+21:49:19.338 [main] log-level=ERROR o.t.d.DockerClientProviderStrategy  Could not find a valid Docker environment. Please check configuration. Attempted configurations were:
+As no valid configuration was found, execution cannot continue.
+See https://www.testcontainers.org/on_failure.html for more details.

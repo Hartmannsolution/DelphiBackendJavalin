@@ -1,0 +1,53 @@
+POST {{url}}/auth/register
+
+{
+    "username": "thomas",
+    "password": "test123"
+}
+###
+POST {{url}}/auth/login
+
+{
+    "username": "thomas",
+    "password": "test123"
+}
+> {%
+ client.global.set("token", response.body.token);
+%}
+
+### GET all answers
+GET {{url}}/answers
+Authorization: Bearer {{token}}
+
+### POST a new answer
+POST {{url}}/answers
+Authorization: Bearer {{token}}
+
+{
+    "text": "This is my answer.",
+    "className": "TestClass",
+    "positive": true
+}
+
+### GET rating for a specific answer
+GET {{url}}/ratings/3
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### Create a new rating
+POST {{url}}/ratings/5
+Authorization: Bearer {{token}}
+
+{
+    "value": -1
+}
+
+### Create a new class
+POST {{url}}/classes
+Authorization: Bearer {{token}}
+
+{
+    "name": "TestClass2",
+    "numberOfStudents": 20,
+    "facilitator": "thomas"
+}

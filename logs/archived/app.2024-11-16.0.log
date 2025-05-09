@@ -1,0 +1,4 @@
+11:57:08.231 [main] log-level=ERROR o.h.e.jdbc.spi.SqlExceptionHelper  Connection to localhost:5432 refused. Check that the hostname and port are correct and that the postmaster is accepting TCP/IP connections.
+21:14:28.046 [main] log-level=ERROR o.t.d.DockerClientProviderStrategy  Could not find a valid Docker environment. Please check configuration. Attempted configurations were:
+	UnixSocketClientProviderStrategy: failed with exception InternalServerErrorException (Status 500: )As no valid configuration was found, execution cannot continue.
+See https://www.testcontainers.org/on_failure.html for more details.

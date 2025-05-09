@@ -1,0 +1,9 @@
+07:24:29.257 [main] log-level=ERROR o.h.e.jdbc.spi.SqlExceptionHelper  ERROR: update or delete on table "users" violates foreign key constraint "fk6bswaw79xgxmixspmis7j9mb9" on table "evaluator"
+  Detail: Key (username)=(user) is still referenced from table "evaluator".
+07:36:16.914 [main] log-level=ERROR o.h.e.jdbc.spi.SqlExceptionHelper  ERROR: update or delete on table "evaluator" violates foreign key constraint "fk76d6i8w6omk64bdg1b0noib94" on table "classname"
+  Detail: Key (id)=(3) is still referenced from table "classname".
+07:38:36.389 [main] log-level=ERROR o.h.e.jdbc.spi.SqlExceptionHelper  ERROR: update or delete on table "classname" violates foreign key constraint "fkla1j2ccawb88dt77wg59bwn11" on table "answer"
+  Detail: Key (id)=(2) is still referenced from table "answer".
+10:03:17.588 [JettyServerThreadPool-38] log-level=ERROR o.h.e.jdbc.spi.SqlExceptionHelper  ERROR: duplicate key value violates unique constraint "uk_36dmhrs8bm6fendxdey8uu8g1"
+  Detail: Key (name)=(Math 101) already exists.
+11:38:03.579 [JettyServerThreadPool-47] log-level=ERROR d.c.rest.controllers.Controller  Error creating classio.javalin.validation.ValidationException

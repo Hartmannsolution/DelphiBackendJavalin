@@ -1,0 +1,2 @@
+22:06:45.160 [JettyServerThreadPool-26] log-level=ERROR dk.cphbusiness.rest.P06LoggingDemo  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX Hello World
+22:06:45.165 [JettyServerThreadPool-26] log-level=DEBUG dk.cphbusiness.rest.P06LoggingDemo  YYYYYYYYYYYYYYYYYYYYYYYYYYYYYY Hello World

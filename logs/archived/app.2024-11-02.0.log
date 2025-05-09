@@ -1,0 +1,6 @@
+15:16:30.060 [main] log-level=ERROR o.h.e.jdbc.spi.SqlExceptionHelper  ERROR: duplicate key value violates unique constraint "guide_email_key"
+  Detail: Key (email)=(jd@mail.com) already exists.
+15:17:06.071 [main] log-level=ERROR o.h.e.jdbc.spi.SqlExceptionHelper  ERROR: duplicate key value violates unique constraint "guide_email_key"
+  Detail: Key (email)=(jd@mail.com) already exists.
+15:17:42.941 [main] log-level=ERROR o.h.e.jdbc.spi.SqlExceptionHelper  ERROR: duplicate key value violates unique constraint "guide_email_key"
+  Detail: Key (email)=(jd@mail.com) already exists.
