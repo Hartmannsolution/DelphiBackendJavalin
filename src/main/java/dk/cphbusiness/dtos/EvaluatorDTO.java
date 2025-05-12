@@ -29,7 +29,7 @@ public class EvaluatorDTO {
         this.username = facilitator.getUser().getUsername();
         this.classes = facilitator.getClasses()
                 .stream()
-                .map(className -> new ClassDTO(className.getName(), null, className.getNumberOfStudents(), username))
+                .map(className -> new ClassDTO(-1, className.getName(), null, className.getNumberOfStudents(), username))
                 .collect(Collectors.toList());
     }
 

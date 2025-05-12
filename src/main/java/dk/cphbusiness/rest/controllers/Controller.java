@@ -12,24 +12,18 @@ package dk.cphbusiness.rest.controllers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dk.cphbusiness.dtos.AnswerDTO;
 import dk.cphbusiness.dtos.ClassDTO;
-import dk.cphbusiness.dtos.EvaluatorDTO;
 import dk.cphbusiness.dtos.RatingDTO;
 import dk.cphbusiness.exceptions.ApiException;
-import dk.cphbusiness.persistence.HibernateConfig;
 import dk.cphbusiness.persistence.daos.DAO;
 import dk.cphbusiness.utils.Utils;
 import io.javalin.http.Context;
-import io.javalin.http.HttpStatus;
 import io.javalin.validation.BodyValidator;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * Purpose: REST controller for RatingDTO.
@@ -101,10 +95,11 @@ public class Controller implements IController {
         BodyValidator<ClassDTO> bodyValidator = ctx.bodyValidator(ClassDTO.class);
         ClassDTO classDTO = bodyValidator
                 .check(dto -> dto.getName() != null && !dto.getName().isEmpty(), "Class name is required")
-                .check(dto -> dto.getFacilitator() != null && !dto.getFacilitator().isEmpty(), "Facilitator is required")
+//                .check(dto -> dto.getFacilitator() != null && !dto.getFacilitator().isEmpty(), "Facilitator is required")
                 .get();
 
-        classDTO = dao.update(classDTO);
+        classDTO.setId(Long.parseLong(ctx.pathParam("classId")));
+        classDTO = dao.updateClass(classDTO);
         ctx.status(201).json(classDTO);
 
     }
@@ -113,7 +108,7 @@ public class Controller implements IController {
     public void addCommentToAnswer(Context ctx) {
        // Add comment
         Long answerId = Long.valueOf(ctx.pathParam("answerId"));
-        String comment = ctx.body();
+        String comment = ctx.bodyAsClass(AnswerDTO.class).getComment();
         if ( comment.isEmpty()) {
             throw new ApiException(400, "Comment is required");
         }

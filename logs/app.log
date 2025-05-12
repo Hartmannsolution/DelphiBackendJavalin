@@ -1,15 +1,4 @@
-12:43:15.960 [JettyServerThreadPool-37] log-level=ERROR d.c.rest.controllers.Controller  Error creating classio.javalin.validation.ValidationException
-13:22:42.459 [JettyServerThreadPool-35] log-level=ERROR d.c.rest.controllers.Controller  Error creating classio.javalin.validation.ValidationException
-13:28:49.752 [JettyServerThreadPool-47] log-level=ERROR d.c.rest.controllers.Controller  Error creating classio.javalin.validation.ValidationException
-13:40:13.432 [JettyServerThreadPool-34] log-level=ERROR d.c.rest.controllers.Controller  Error creating classcom.fasterxml.jackson.databind.exc.UnrecognizedPropertyException: Unrecognized field "isPositive" (class dk.cphbusiness.dtos.AnswerDTO), not marked as ignorable (6 known properties: "className", "ratings", "positive", "id", "text", "comment"])
- at [Source: (String)"{
-    "text": "This is my answer.",
-    "className": "TestClass",
-    "isPositive": true,
-}"; line: 4, column: 23] (through reference chain: dk.cphbusiness.dtos.AnswerDTO["isPositive"])
-13:45:09.388 [JettyServerThreadPool-50] log-level=ERROR d.c.rest.controllers.Controller  Error creating classcom.fasterxml.jackson.core.JsonParseException: Unexpected character ('}' (code 125)): was expecting double-quote to start field name
- at [Source: (String)"{
-    "text": "This is my answer.",
-    "className": "TestClass",
-    "positive": true,
-}"; line: 5, column: 2]
+15:26:58.720 [JettyServerThreadPool-39] log-level=ERROR o.h.e.jdbc.spi.SqlExceptionHelper  ERROR: duplicate key value violates unique constraint "uk_36dmhrs8bm6fendxdey8uu8g1"
+  Detail: Key (name)=(Test38) already exists.
+15:40:07.176 [JettyServerThreadPool-34] log-level=ERROR o.h.e.jdbc.spi.SqlExceptionHelper  ERROR: duplicate key value violates unique constraint "uk_36dmhrs8bm6fendxdey8uu8g1"
+  Detail: Key (name)=(Test39) already exists.

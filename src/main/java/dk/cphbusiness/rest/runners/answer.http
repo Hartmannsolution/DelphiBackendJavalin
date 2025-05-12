@@ -1,14 +1,14 @@
 POST {{url}}/auth/register
 
 {
-    "username": "thomas",
+    "username": "samoht",
     "password": "test123"
 }
 ###
 POST {{url}}/auth/login
 
 {
-    "username": "thomas",
+    "username": "samoht",
     "password": "test123"
 }
 > {%
@@ -29,6 +29,14 @@ Authorization: Bearer {{token}}
     "positive": true
 }
 
+### PUT to comment an answer
+PUT {{url}}/answers/7
+Authorization: Bearer {{token}}
+
+{
+    "comment": "This is my comment."
+}
+
 ### GET rating for a specific answer
 GET {{url}}/ratings/3
 Authorization: Bearer {{token}}
@@ -47,7 +55,17 @@ POST {{url}}/classes
 Authorization: Bearer {{token}}
 
 {
-    "name": "TestClass2",
+    "name": "TestClass5",
     "numberOfStudents": 20,
+    "facilitator": "thomas"
+}
+
+### edit a class
+PUT {{url}}/classes/12
+Authorization: Bearer {{token}}
+
+{
+    "name": "Test44",
+    "numberOfStudents": 33,
     "facilitator": "thomas"
 }

@@ -21,14 +21,16 @@ public class RestRoutes {
             path("", () -> {
                 path("/answers", () -> {
                     get(controller::getAllAnswers, Role.USER);
-                    post(controller::createAnswer, Role.USER);
+                    post(controller::createAnswer, Role.ANYONE);
+                    put("{answerId}",controller::addCommentToAnswer, Role.USER);
                 });
                 path("/ratings", () -> {
                     get("{answerId}", controller::getAllRatings, Role.USER);
-                    post("{answerId}", controller::createRating, Role.USER);
+                    post("{answerId}", controller::createRating, Role.ANYONE);
                 });
                 path("/classes", () -> {
                     post(controller::createClass, Role.USER);
+                    put("{classId}",controller::editClass, Role.USER);
                 });
             });
         };

@@ -61,11 +61,13 @@ public class DAO implements IDAO{
     @Override
     public ClassDTO create(ClassDTO dto) {
         try (EntityManager em = emf.createEntityManager()) {
+            em.getTransaction().begin();
             TypedQuery<Evaluator> query = em.createQuery("SELECT e FROM Evaluator e WHERE e.user.username = :username", Evaluator.class);
             query.setParameter("username", dto.getFacilitator());
             Evaluator evaluator = query.getSingleResult();
-            em.getTransaction().begin();
+            System.out.println("Evaluator: " + evaluator);
             ClassName className = dto.toEntity(evaluator);
+            className.setId(null);
             em.persist(className);
             em.getTransaction().commit();
             return new ClassDTO(className);
@@ -76,19 +78,26 @@ public class DAO implements IDAO{
     }
 
     @Override
-    public ClassDTO update(ClassDTO dto) throws EntityNotFoundException {
+    public ClassDTO updateClass(ClassDTO dto) throws EntityNotFoundException {
         try (EntityManager em = emf.createEntityManager()) {
+            ClassName className = em.find(ClassName.class, dto.getId());
+            if (className == null) {
+                throw new EntityNotFoundException("Class not found with id: " + dto.getId());
+            }
             TypedQuery<Evaluator> query = em.createQuery("SELECT e FROM Evaluator e WHERE e.user.username = :username", Evaluator.class);
             query.setParameter("username", dto.getFacilitator());
             Evaluator evaluator = query.getSingleResult();
             em.getTransaction().begin();
-            ClassName className = dto.toEntity(evaluator);
-            em.persist(className);
+//            ClassName updateClass = dto.toEntity(evaluator);
+//            em.merge(updateClass);
+            className.setName(dto.getName());
+            className. setFacilitator(evaluator);
+            className.setNumberOfStudents(dto.getNumberOfStudents());
             em.getTransaction().commit();
             return new ClassDTO(className);
         } catch (Exception e) {
-            logger.log(java.util.logging.Level.SEVERE, "Error creating class", e);
-            throw new RuntimeException("Error creating class: " + e.getMessage());
+            logger.log(java.util.logging.Level.SEVERE, "Error updating class", e);
+            throw new RuntimeException("Error updating class: " + e.getMessage());
         }
     }
 
@@ -99,9 +108,6 @@ public class DAO implements IDAO{
         Map<String, IIdProvider<String>> users = new Populator().createUsersAndRoles(emf);
         EvaluatorDTO evaluator = new EvaluatorDTO(((User) users.get("user")).getUsername());
         evaluator = dao.createEvaluator(evaluator);
-        ClassDTO classDTO = new ClassDTO("TestClass", null, 10, evaluator.getUsername());
-        classDTO = dao.create(classDTO);
-        System.out.println("Class created: " + classDTO.getName());
         AnswerDTO answerDTO = AnswerDTO.builder()
                 .text("Test Answer")
                 .isPositive(true)
@@ -115,8 +121,8 @@ public class DAO implements IDAO{
         System.out.println("Rating created: " + ratingDTO.getValue());
         answerDTO.setComment("sfsfsf sdfs fs dfs fsf sdf sdfs dfs dfsdf sdfs dfsdf sdf sdfsdf sdfs dfs dfsdf sdf sdf sdf sdf sdfsdfsdfsdfs sdfsdfsdf sdfsdfsdf sdfsdfsdfsdf sdfsdfsdf sdfsd sdfsd  sdfsdfsdfsdf sdfsdfsdf sdfsdfsdf sdfsdfsdf sdfsdf sdfsdf sdfsdf");
         dao.update(answerDTO.getId(), answerDTO);
-
     }
+
     public AnswerDTO getAnswer(Long id) {
         try (EntityManager em = emf.createEntityManager()) {
             Answer answer = em.find(Answer.class, id);
@@ -146,7 +152,6 @@ public class DAO implements IDAO{
             throw new RuntimeException("Error updating answer: " + e.getMessage());
         }
     }
-
 
     @Override
     public Set<AnswerDTO> getAllAnswers() {
