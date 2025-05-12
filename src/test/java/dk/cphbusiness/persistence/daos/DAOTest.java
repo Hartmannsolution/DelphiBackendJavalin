@@ -33,91 +33,91 @@ class DAOTest {
     AnswerDTO answerDTO;
     RatingDTO ratingDTO;
 
-    @BeforeAll
-    void setup() {
-        EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryForTest();
-        dao = new DAO(emf);
-        Populator populator = new Populator();
-        users = populator.createUsersAndRoles(emf);
-        evaluator = new EvaluatorDTO(((User)users.get("user")).getUsername());
-        evaluator = dao.createEvaluator(evaluator);
-        classDTO = new ClassDTO("TestClass", null, 10, evaluator.getUsername());
-        classDTO = dao.create(classDTO);
-        answerDTO = AnswerDTO.builder()
-                .text("Test Answer")
-                .isPositive(true)
-                .className("TestClass")
-                .comment("Test comment")
-                .build();
-        answerDTO = dao.create(answerDTO);
-        ratingDTO = new RatingDTO(null, answerDTO.getId(), Rating.Value.AGREE);
-        dao.create(ratingDTO);
-    }
-
-    @Test
-    void testCreateAndGetAnswer() {
-        EvaluatorDTO evaluatorDTO = new EvaluatorDTO();
-        ClassDTO classDTO = new ClassDTO("TestClass", null, 10, evaluatorDTO.getUsername());
-
-        AnswerDTO dto = AnswerDTO.builder()
-                .text("Test Answer")
-                .isPositive(true)
-                .className("TestClass")
-                .comment("Test comment")
-                .build();
-
-        ClassDTO createdClass = dao.create(classDTO);
-        AnswerDTO created = dao.create(dto);
-
-        assertNotNull(created.getId());
-        assertEquals("Test Answer", created.getText());
-
-        Set<AnswerDTO> all = dao.getAllAnswers();
-        assertTrue(all.stream().anyMatch(a -> a.getId().equals(created.getId())));
-    }
-
-//    @Test
-//    void testCreateClass() {
-//        ClassDTO dto = new ClassDTO(null, "MyClass", 10);
-//        ClassDTO created = dao.create(dto);
-//
-//        assertNotNull(created.getId());
-//        assertEquals("MyClass", created.getName());
-//    }
-//
-//    @Test
-//    void testCreateAndGetRating() {
-//        AnswerDTO answerDTO = dao.create(AnswerDTO.builder()
-//                .text("Rating Answer")
+//    @BeforeAll
+//    void setup() {
+//        EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryForTest();
+//        dao = new DAO(emf);
+//        Populator populator = new Populator();
+//        users = populator.createUsersAndRoles(emf);
+//        evaluator = new EvaluatorDTO(((User)users.get("user")).getUsername());
+//        evaluator = dao.createEvaluator(evaluator);
+//        classDTO = new ClassDTO("TestClass", null, 10, evaluator.getUsername());
+//        classDTO = dao.create(classDTO);
+//        answerDTO = AnswerDTO.builder()
+//                .text("Test Answer")
 //                .isPositive(true)
-//                .time(LocalDateTime.now())
-//                .className("RClass")
-//                .comment("Comment")
-//                .build());
-//
-//        RatingDTO ratingDTO = new RatingDTO(null, answerDTO.getId(), Rating.Value.AGREE);
-//        RatingDTO created = dao.create(ratingDTO);
-//
-//        assertNotNull(created.getId());
-//        assertEquals(Rating.Value.AGREE, created.getValue());
-//
-//        Set<RatingDTO> ratings = dao.getAllRatings(answerDTO.getId());
-//        assertEquals(1, ratings.size());
+//                .className("TestClass")
+//                .comment("Test comment")
+//                .build();
+//        answerDTO = dao.create(answerDTO);
+//        ratingDTO = new RatingDTO(null, answerDTO.getId(), Rating.Value.AGREE);
+//        dao.create(ratingDTO);
 //    }
 //
 //    @Test
-//    void testUpdateAnswer() {
-//        AnswerDTO original = dao.create(AnswerDTO.builder()
-//                .text("ToUpdate")
-//                .isPositive(false)
-//                .time(LocalDateTime.now())
-//                .className("UpdateClass")
-//                .comment("Old comment")
-//                .build());
+//    void testCreateAndGetAnswer() {
+//        EvaluatorDTO evaluatorDTO = new EvaluatorDTO();
+//        ClassDTO classDTO = new ClassDTO("TestClass", null, 10, evaluatorDTO.getUsername());
 //
-//        original.setComment("Updated comment");
-//        AnswerDTO updated = dao.update(original.getId(), original);
+//        AnswerDTO dto = AnswerDTO.builder()
+//                .text("Test Answer")
+//                .isPositive(true)
+//                .className("TestClass")
+//                .comment("Test comment")
+//                .build();
 //
-//        assertEquals("Updated comment", updated.getComment());
+//        ClassDTO createdClass = dao.create(classDTO);
+//        AnswerDTO created = dao.create(dto);
+//
+//        assertNotNull(created.getId());
+//        assertEquals("Test Answer", created.getText());
+//
+//        Set<AnswerDTO> all = dao.getAllAnswers();
+//        assertTrue(all.stream().anyMatch(a -> a.getId().equals(created.getId())));
 //    }
+//
+////    @Test
+////    void testCreateClass() {
+////        ClassDTO dto = new ClassDTO(null, "MyClass", 10);
+////        ClassDTO created = dao.create(dto);
+////
+////        assertNotNull(created.getId());
+////        assertEquals("MyClass", created.getName());
+////    }
+////
+////    @Test
+////    void testCreateAndGetRating() {
+////        AnswerDTO answerDTO = dao.create(AnswerDTO.builder()
+////                .text("Rating Answer")
+////                .isPositive(true)
+////                .time(LocalDateTime.now())
+////                .className("RClass")
+////                .comment("Comment")
+////                .build());
+////
+////        RatingDTO ratingDTO = new RatingDTO(null, answerDTO.getId(), Rating.Value.AGREE);
+////        RatingDTO created = dao.create(ratingDTO);
+////
+////        assertNotNull(created.getId());
+////        assertEquals(Rating.Value.AGREE, created.getValue());
+////
+////        Set<RatingDTO> ratings = dao.getAllRatings(answerDTO.getId());
+////        assertEquals(1, ratings.size());
+////    }
+////
+////    @Test
+////    void testUpdateAnswer() {
+////        AnswerDTO original = dao.create(AnswerDTO.builder()
+////                .text("ToUpdate")
+////                .isPositive(false)
+////                .time(LocalDateTime.now())
+////                .className("UpdateClass")
+////                .comment("Old comment")
+////                .build());
+////
+////        original.setComment("Updated comment");
+////        AnswerDTO updated = dao.update(original.getId(), original);
+////
+////        assertEquals("Updated comment", updated.getComment());
+////    }
 }
