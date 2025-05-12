@@ -1,9 +1,9 @@
-name: GITHUB ACTIONS WORKFLOW DEMO
+name: deploy to dockerhub
 on:
   push:
-    branches: [ main, booking ]
+    branches: [ main, master ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, master ]
 jobs:
   build:
     runs-on: ubuntu-latest
