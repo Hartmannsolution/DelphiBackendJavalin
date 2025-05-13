@@ -21,7 +21,6 @@ Authorization: Bearer {{token}}
 
 ### POST a new answer
 POST {{url}}/answers
-Authorization: Bearer {{token}}
 
 {
     "text": "This is my answer.",

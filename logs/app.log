@@ -1,1 +1,2 @@
 16:51:21.569 [JettyServerThreadPool-47] log-level=ERROR d.c.rest.controllers.Controller  Error getting class by name: Error getting class: no class with name TestClas
+17:48:05.010 [JettyServerThreadPool-51] log-level=ERROR d.c.rest.controllers.Controller  Error getting class by name: Error getting class: no class with name TestClas

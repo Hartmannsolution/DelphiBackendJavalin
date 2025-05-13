@@ -21,7 +21,7 @@ public class RestRoutes {
         return () -> {
             path("", () -> {
                 path("/answers", () -> {
-                    get(controller::getAllAnswers, Role.USER);
+                    get(controller::getAllAnswers, Role.ANYONE);
                     post(controller::createAnswer, Role.ANYONE);
                     put("{answerId}",controller::addCommentToAnswer, Role.USER);
                 });
