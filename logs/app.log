@@ -1,4 +1,1 @@
-15:26:58.720 [JettyServerThreadPool-39] log-level=ERROR o.h.e.jdbc.spi.SqlExceptionHelper  ERROR: duplicate key value violates unique constraint "uk_36dmhrs8bm6fendxdey8uu8g1"
-  Detail: Key (name)=(Test38) already exists.
-15:40:07.176 [JettyServerThreadPool-34] log-level=ERROR o.h.e.jdbc.spi.SqlExceptionHelper  ERROR: duplicate key value violates unique constraint "uk_36dmhrs8bm6fendxdey8uu8g1"
-  Detail: Key (name)=(Test39) already exists.
+16:51:21.569 [JettyServerThreadPool-47] log-level=ERROR d.c.rest.controllers.Controller  Error getting class by name: Error getting class: no class with name TestClas

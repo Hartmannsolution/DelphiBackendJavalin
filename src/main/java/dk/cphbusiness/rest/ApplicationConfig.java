@@ -126,6 +126,15 @@ public class ApplicationConfig {
             ctx.json(on);
             ctx.status(statusCode);
         });
+        app.exception(RuntimeException.class, (e, ctx) -> {
+            int statusCode = 500;
+            ObjectNode on = jsonMapper
+                    .createObjectNode()
+                    .put("status", statusCode)
+                    .put("msg", e.getMessage());
+            ctx.status(statusCode);
+            ctx.json(on);
+        });
         return appConfig;
     }
 

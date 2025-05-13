@@ -105,6 +105,19 @@ public class Controller implements IController {
     }
 
     @Override
+    public void getClassName(Context ctx) {
+        String className = ctx.pathParam("className");
+        System.out.println("Class name: " + className);
+        try {
+            ClassDTO classDTO = dao.getClassByName(className);
+            ctx.status(200).json(classDTO);
+        } catch (RuntimeException ex) {
+            logger.error("Error getting class by name: " + ex.getMessage());
+            throw new ApiException(404, "Error getting class by name: " + ex.getMessage());
+        }
+    }
+
+    @Override
     public void addCommentToAnswer(Context ctx) {
        // Add comment
         Long answerId = Long.valueOf(ctx.pathParam("answerId"));

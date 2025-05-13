@@ -101,6 +101,22 @@ public class DAO implements IDAO{
         }
     }
 
+    @Override
+    public ClassDTO getClassByName(String name) {
+        try (EntityManager em = emf.createEntityManager()) {
+            TypedQuery<ClassName> query = em.createQuery("SELECT c FROM ClassName c WHERE c.name = :name", ClassName.class);
+            query.setParameter("name", name);
+            ClassName className = query.getSingleResult();
+            if (className == null) {
+                throw new EntityNotFoundException("Class not found with name: " + name);
+            }
+            return new ClassDTO(className);
+        } catch (Exception e) {
+            logger.log(java.util.logging.Level.SEVERE, "Error getting class", e);
+            throw new RuntimeException("Error getting class: no class with name " + name);
+        }
+    }
+
     public static void main(String[] args) {
         // Test create class
         EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory();

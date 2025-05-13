@@ -1,19 +1,29 @@
 POST {{url}}/auth/register
 
 {
-    "username": "samoht",
-    "password": "test123"
+    "username": "thomas",
+    "password": "thasecret"
 }
 ###
 POST {{url}}/auth/login
 
 {
-    "username": "samoht",
-    "password": "test123"
+    "username": "thomas",
+    "password": "thasecret"
 }
 > {%
  client.global.set("token", response.body.token);
 %}
+
+### Create a new class
+POST {{url}}/classes
+Authorization: Bearer {{token}}
+
+{
+    "name": "TestClass",
+    "numberOfStudents": 20,
+    "facilitator": "thomas"
+}
 
 ### GET all answers
 GET {{url}}/answers
@@ -30,7 +40,7 @@ Authorization: Bearer {{token}}
 }
 
 ### PUT to comment an answer
-PUT {{url}}/answers/7
+PUT {{url}}/answers/1
 Authorization: Bearer {{token}}
 
 {
@@ -38,12 +48,12 @@ Authorization: Bearer {{token}}
 }
 
 ### GET rating for a specific answer
-GET {{url}}/ratings/3
+GET {{url}}/ratings/1
 Authorization: Bearer {{token}}
 Accept: application/json
 
 ### Create a new rating
-POST {{url}}/ratings/5
+POST {{url}}/ratings/1
 Authorization: Bearer {{token}}
 
 {
@@ -69,8 +79,5 @@ Authorization: Bearer {{token}}
     "numberOfStudents": 33,
     "facilitator": "thomas"
 }
-
-### GET a class by name
-GET {{url}}/classes/TestClas
 
 

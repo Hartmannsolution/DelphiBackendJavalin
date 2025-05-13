@@ -19,6 +19,7 @@ public interface IDAO {
     ClassDTO create(ClassDTO dto);
     AnswerDTO update(Long id, AnswerDTO dto) throws EntityNotFoundException; // For adding a comment to the answer
     ClassDTO updateClass(ClassDTO classDTO) throws EntityNotFoundException;
+    ClassDTO getClassByName(String name);
     RatingDTO create(RatingDTO dto);
     EvaluatorDTO createEvaluator(EvaluatorDTO dto);
 }

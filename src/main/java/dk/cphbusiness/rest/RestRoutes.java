@@ -2,6 +2,7 @@ package dk.cphbusiness.rest;
 
 import dk.cphbusiness.persistence.HibernateConfig;
 import dk.cphbusiness.rest.controllers.Controller;
+import dk.cphbusiness.rest.controllers.IController;
 import dk.cphbusiness.security.SecurityRoutes;
 import dk.cphbusiness.security.SecurityRoutes.Role;
 import io.javalin.apibuilder.EndpointGroup;
@@ -14,7 +15,7 @@ import static io.javalin.apibuilder.ApiBuilder.*;
  * Author: Thomas Hartmann
  */
 public class RestRoutes {
-    private static final Controller controller = new Controller(HibernateConfig.getEntityManagerFactory());
+    private static final IController controller = new Controller(HibernateConfig.getEntityManagerFactory());
     public static EndpointGroup getRoutes() {
         // get all the routes from controller: getAllAnswers, getAllRatings, createAnswer, createClass, addCommentToAnswer, createRating, createEvaluator
         return () -> {
@@ -31,6 +32,7 @@ public class RestRoutes {
                 path("/classes", () -> {
                     post(controller::createClass, Role.USER);
                     put("{classId}",controller::editClass, Role.USER);
+                    get("{className}", controller::getClassName, Role.ANYONE);
                 });
             });
         };
