@@ -17,7 +17,6 @@ POST {{url}}/auth/login
 
 ### GET all answers
 GET {{url}}/answers
-Authorization: Bearer {{token}}
 
 ### POST a new answer
 POST {{url}}/answers
@@ -42,12 +41,22 @@ Authorization: Bearer {{token}}
 Accept: application/json
 
 ### Create a new rating
-POST {{url}}/ratings/5
-Authorization: Bearer {{token}}
+POST {{url}}/ratings
 
-{
-    "value": -1
-}
+[
+    {
+        "answerId": 3,
+        "value": -1
+    },
+    {
+        "answerId": 4,
+        "value": 1
+    },
+    {
+        "answerId": 5,
+        "value": 0
+    }
+]
 
 ### Create a new class
 POST {{url}}/classes

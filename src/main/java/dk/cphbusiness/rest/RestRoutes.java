@@ -27,7 +27,7 @@ public class RestRoutes {
                 });
                 path("/ratings", () -> {
                     get("{answerId}", controller::getAllRatings, Role.USER);
-                    post("{answerId}", controller::createRating, Role.ANYONE);
+                    post(controller::createRatings, Role.ANYONE);
                 });
                 path("/classes", () -> {
                     post(controller::createClass, Role.USER);

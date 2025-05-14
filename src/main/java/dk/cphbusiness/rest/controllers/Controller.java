@@ -9,12 +9,14 @@ package dk.cphbusiness.rest.controllers;
 //import dk.cphbusiness.persistence.daos.ITripGuideDAO;
 
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dk.cphbusiness.dtos.AnswerDTO;
 import dk.cphbusiness.dtos.ClassDTO;
 import dk.cphbusiness.dtos.RatingDTO;
 import dk.cphbusiness.exceptions.ApiException;
 import dk.cphbusiness.persistence.daos.DAO;
+import dk.cphbusiness.persistence.model.Rating;
 import dk.cphbusiness.utils.Utils;
 import io.javalin.http.Context;
 import io.javalin.validation.BodyValidator;
@@ -23,6 +25,8 @@ import jakarta.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -134,21 +138,30 @@ public class Controller implements IController {
         ctx.status(200).json(answerDTO);
     }
 
-    @Override
-    public void createRating(Context ctx) {
+    private RatingDTO createRating(RatingDTO ratingDTO) {
         // create rating based on body
-        BodyValidator<RatingDTO> bodyValidator = ctx.bodyValidator(RatingDTO.class);
-        RatingDTO ratingDTO = bodyValidator
-                .check(dto -> dto.getValue() < 2 && dto.getValue() > -2, "Rating value must be between -1 and 1")
-                .get();
-        Long answerId = Long.valueOf(ctx.pathParam("answerId"));
-        AnswerDTO answerDTO = dao.getAnswer(answerId);
+        AnswerDTO answerDTO = dao.getAnswer(ratingDTO.getAnswerId());
         if (answerDTO == null) {
             throw new EntityNotFoundException("No such answer");
         }
-        ratingDTO.setAnswerId(answerId);
         ratingDTO = dao.create(ratingDTO);
-        ctx.status(201).json(ratingDTO);
+        return ratingDTO;
+    }
+
+    @Override
+    public void createRatings(Context ctx) {
+        // get all ratings from body as List<RatingDTO>
+        ObjectMapper objectMapper = Utils.getObjectMapper();
+        try {
+            List<RatingDTO> ratingDTOs = objectMapper.readValue(ctx.body(), new TypeReference<List<RatingDTO>>() {});
+            ratingDTOs.forEach(ratingDTO -> {
+                RatingDTO rating = createRating(ratingDTO);
+            });
+            ctx.status(201);
+        } catch (IOException ex){
+            logger.error("Error creating ratings: {}", ex.getMessage());
+            throw new ApiException(400, "Error reading the ratings");
+        }
     }
 }
 
