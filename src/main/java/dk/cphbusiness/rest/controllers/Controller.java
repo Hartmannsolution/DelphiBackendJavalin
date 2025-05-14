@@ -47,7 +47,8 @@ public class Controller implements IController {
 
     @Override
     public void getAllAnswers(Context ctx) {
-        ctx.status(200).json(dao.getAllAnswers());
+        String className = ctx.pathParam("className");
+        ctx.status(200).json(dao.getAllAnswers(className));
     }
 
     @Override

@@ -13,13 +13,15 @@ import java.util.Set;
  * Author: Thomas Hartmann
  */
 public interface IDAO {
-    Set<AnswerDTO> getAllAnswers();
+    Set<AnswerDTO> getAllAnswers(String className);
     Set<RatingDTO> getAllRatings(Long answerId);
     AnswerDTO create(AnswerDTO dto);
     ClassDTO create(ClassDTO dto);
     AnswerDTO update(Long id, AnswerDTO dto) throws EntityNotFoundException; // For adding a comment to the answer
     ClassDTO updateClass(ClassDTO classDTO) throws EntityNotFoundException;
     ClassDTO getClassByName(String name);
+
+
     RatingDTO create(RatingDTO dto);
     EvaluatorDTO createEvaluator(EvaluatorDTO dto);
 }

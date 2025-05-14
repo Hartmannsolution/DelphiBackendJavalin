@@ -10,7 +10,6 @@ import dk.cphbusiness.utils.IIdProvider;
 import dk.cphbusiness.utils.Populator;
 import jakarta.persistence.*;
 
-import java.io.Serializable;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -170,9 +169,10 @@ public class DAO implements IDAO{
     }
 
     @Override
-    public Set<AnswerDTO> getAllAnswers() {
+    public Set<AnswerDTO> getAllAnswers(String className) {
         try (EntityManager em = emf.createEntityManager()) {
-            TypedQuery<AnswerDTO> query = em.createQuery("SELECT new dk.cphbusiness.dtos.AnswerDTO(a) FROM  Answer a", AnswerDTO.class);
+            TypedQuery<AnswerDTO> query = em.createQuery("SELECT new dk.cphbusiness.dtos.AnswerDTO(a) FROM  Answer a WHERE a.className.name = :className", AnswerDTO.class);
+            query.setParameter("className", className);
             return query.getResultStream().collect(Collectors.toSet());
         } catch (Exception e) {
            logger.log(java.util.logging.Level.SEVERE, "Error getting all) answers", e);

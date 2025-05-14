@@ -16,7 +16,7 @@ POST {{url}}/auth/login
 %}
 
 ### GET all answers
-GET {{url}}/answers
+GET {{url}}/answers/TestClass
 
 ### POST a new answer
 POST {{url}}/answers
