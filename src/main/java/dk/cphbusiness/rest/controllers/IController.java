@@ -14,7 +14,7 @@ public interface IController {
     void createClass(Context ctx);
     void editClass(Context ctx);
     void getClassName(Context ctx);
-    void addCommentToAnswer(Context ctx);
+    void addCommentsToAnswers(Context ctx);
     void createRatings(Context ctx);
 //    void createEvaluator(Context ctx); // will be created at register
 

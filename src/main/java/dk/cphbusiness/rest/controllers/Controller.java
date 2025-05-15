@@ -16,7 +16,7 @@ import dk.cphbusiness.dtos.ClassDTO;
 import dk.cphbusiness.dtos.RatingDTO;
 import dk.cphbusiness.exceptions.ApiException;
 import dk.cphbusiness.persistence.daos.DAO;
-import dk.cphbusiness.persistence.model.Rating;
+import dk.cphbusiness.persistence.daos.IDAO;
 import dk.cphbusiness.utils.Utils;
 import io.javalin.http.Context;
 import io.javalin.validation.BodyValidator;
@@ -35,7 +35,7 @@ import java.util.Set;
  */
 public class Controller implements IController {
 
-    private static DAO dao;
+    private static IDAO dao;
     private static ObjectMapper objectMapper = Utils.getObjectMapper();
     private static final Logger logger = LoggerFactory.getLogger(Controller.class);
 
@@ -123,20 +123,22 @@ public class Controller implements IController {
     }
 
     @Override
-    public void addCommentToAnswer(Context ctx) {
-       // Add comment
-        Long answerId = Long.valueOf(ctx.pathParam("answerId"));
-        String comment = ctx.bodyAsClass(AnswerDTO.class).getComment();
-        if ( comment.isEmpty()) {
-            throw new ApiException(400, "Comment is required");
+    public void addCommentsToAnswers(Context ctx) {
+       // get Set of AnswerDTOs from context
+        try {
+            Set<AnswerDTO> answers = objectMapper.readValue(ctx.body(), new TypeReference<Set<AnswerDTO>>() {});
+
+            // add comments to answers
+            answers.forEach(answerDTO -> {
+                if (answerDTO.getComment() != null) {
+                    dao.updateAnswer(answerDTO.getId(), answerDTO);
+                }
+            });
+            ctx.status(200).json(answers);
+        } catch (IOException ex) {
+            logger.error("Error adding comments to answers: {}", ex.getMessage());
+            throw new ApiException(400, "Error reading the answers");
         }
-        AnswerDTO answerDTO = dao.getAnswer(answerId);
-        if (answerDTO == null) {
-            throw new EntityNotFoundException("No such answer");
-        }
-        answerDTO.setComment(comment);
-        dao.update(answerDTO.getId(), answerDTO);
-        ctx.status(200).json(answerDTO);
     }
 
     private RatingDTO createRating(RatingDTO ratingDTO) {
@@ -152,7 +154,6 @@ public class Controller implements IController {
     @Override
     public void createRatings(Context ctx) {
         // get all ratings from body as List<RatingDTO>
-        ObjectMapper objectMapper = Utils.getObjectMapper();
         try {
             List<RatingDTO> ratingDTOs = objectMapper.readValue(ctx.body(), new TypeReference<List<RatingDTO>>() {});
             ratingDTOs.forEach(ratingDTO -> {

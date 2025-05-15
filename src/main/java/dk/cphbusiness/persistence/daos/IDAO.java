@@ -17,11 +17,13 @@ public interface IDAO {
     Set<RatingDTO> getAllRatings(Long answerId);
     AnswerDTO create(AnswerDTO dto);
     ClassDTO create(ClassDTO dto);
-    AnswerDTO update(Long id, AnswerDTO dto) throws EntityNotFoundException; // For adding a comment to the answer
+    AnswerDTO updateAnswer(Long id, AnswerDTO dto) throws EntityNotFoundException; // For adding a comment to the answer
     ClassDTO updateClass(ClassDTO classDTO) throws EntityNotFoundException;
     ClassDTO getClassByName(String name);
 
 
     RatingDTO create(RatingDTO dto);
     EvaluatorDTO createEvaluator(EvaluatorDTO dto);
+
+    AnswerDTO getAnswer(Long id);
 }

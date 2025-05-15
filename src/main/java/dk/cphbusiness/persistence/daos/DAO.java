@@ -135,9 +135,10 @@ public class DAO implements IDAO{
         dao.create(ratingDTO);
         System.out.println("Rating created: " + ratingDTO.getValue());
         answerDTO.setComment("sfsfsf sdfs fs dfs fsf sdf sdfs dfs dfsdf sdfs dfsdf sdf sdfsdf sdfs dfs dfsdf sdf sdf sdf sdf sdfsdfsdfsdfs sdfsdfsdf sdfsdfsdf sdfsdfsdfsdf sdfsdfsdf sdfsd sdfsd  sdfsdfsdfsdf sdfsdfsdf sdfsdfsdf sdfsdfsdf sdfsdf sdfsdf sdfsdf");
-        dao.update(answerDTO.getId(), answerDTO);
+        dao.updateAnswer(answerDTO.getId(), answerDTO);
     }
 
+    @Override
     public AnswerDTO getAnswer(Long id) {
         try (EntityManager em = emf.createEntityManager()) {
             Answer answer = em.find(Answer.class, id);
@@ -152,7 +153,7 @@ public class DAO implements IDAO{
     }
 
     @Override
-    public AnswerDTO update(Long id, AnswerDTO dto) throws EntityNotFoundException {
+    public AnswerDTO updateAnswer(Long id, AnswerDTO dto) throws EntityNotFoundException {
         try (EntityManager em = emf.createEntityManager()) {
             Answer found = em.find(Answer.class, id);
             if (found == null) {

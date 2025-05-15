@@ -8,7 +8,7 @@ POST {{url}}/auth/register
 POST {{url}}/auth/login
 
 {
-    "username": "samoht",
+    "username": "samoht",k
     "password": "test123"
 }
 > {%
@@ -28,12 +28,119 @@ POST {{url}}/answers
 }
 
 ### PUT to comment an answer
-PUT {{url}}/answers/7
+PUT {{url}}/answers
 Authorization: Bearer {{token}}
 
-{
-    "comment": "This is my comment."
-}
+
+[
+  {
+    "id": 5,
+    "text": "This is my answer.",
+    "className": "TestClass",
+    "ratings": [
+      {
+        "id": 3,
+        "answerId": 5,
+        "value": -1
+      },
+      {
+        "id": 4,
+        "answerId": 5,
+        "value": -1
+      },
+      {
+        "id": 5,
+        "answerId": 5,
+        "value": -1
+      },
+      {
+        "id": 10,
+        "answerId": 5,
+        "value": 0
+      }
+    ],
+    "positive": true,
+    "comment": "This is my BRAND NEW comment."
+  },
+  {
+    "id": 3,
+    "text": "Test Answer",
+    "className": "TestClass",
+    "comment": "sfsfsf sdfs fs dfs fsf sdf sdfs dfs dfsdf sdfs dfsdf sdf sdfsdf sdfs dfs dfsdf sdf sdf sdf sdf sdfsdfsdfsdfs sdfsdfsdf sdfsdfsdf sdfsdfsdfsdf sdfsdfsdf sdfsd sdfsd  sdfsdfsdfsdf sdfsdfsdf sdfsdfsdf sdfsdfsdf sdfsdf sdfsdf sdfsdf",
+    "ratings": [
+      {
+        "id": 6,
+        "answerId": 3,
+        "value": -1
+      },
+      {
+        "id": 8,
+        "answerId": 3,
+        "value": -1
+      },
+      {
+        "id": 2,
+        "answerId": 3,
+        "value": 1
+      }
+    ],
+    "positive": true
+  },
+  {
+    "id": 4,
+    "text": "This is my answer.",
+    "className": "TestClass",
+    "ratings": [
+      {
+        "id": 7,
+        "answerId": 4,
+        "value": 1
+      },
+      {
+        "id": 9,
+        "answerId": 4,
+        "value": 1
+      }
+    ],
+    "positive": true
+  },
+  {
+    "id": 6,
+    "text": "This is my answer.",
+    "className": "TestClass",
+    "ratings": [],
+    "positive": true
+  },
+  {
+    "id": 8,
+    "text": "This is my answer.",
+    "className": "TestClass",
+    "ratings": [],
+    "positive": true
+  },
+  {
+    "id": 10,
+    "text": "This is my answer.",
+    "className": "TestClass",
+    "ratings": [],
+    "positive": true
+  },
+  {
+    "id": 7,
+    "text": "This is my answer.",
+    "className": "TestClass",
+    "comment": "This is my comment.",
+    "ratings": [],
+    "positive": true
+  },
+  {
+    "id": 9,
+    "text": "This is my answer.",
+    "className": "TestClass",
+    "ratings": [],
+    "positive": true
+  }
+]
 
 ### GET rating for a specific answer
 GET {{url}}/ratings/3

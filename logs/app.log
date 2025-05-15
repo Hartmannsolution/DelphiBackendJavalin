@@ -1,2 +1,3 @@
-16:51:21.569 [JettyServerThreadPool-47] log-level=ERROR d.c.rest.controllers.Controller  Error getting class by name: Error getting class: no class with name TestClas
-17:48:05.010 [JettyServerThreadPool-51] log-level=ERROR d.c.rest.controllers.Controller  Error getting class by name: Error getting class: no class with name TestClas
+18:13:49.922 [JettyServerThreadPool-48] log-level=ERROR o.h.e.jdbc.spi.SqlExceptionHelper  ERROR: duplicate key value violates unique constraint "uk_36dmhrs8bm6fendxdey8uu8g1"
+  Detail: Key (name)=(TestClass5) already exists.
+18:13:49.981 [JettyServerThreadPool-34] log-level=ERROR d.c.rest.controllers.Controller  Error getting class by name: Error getting class: no class with name TestClas
