@@ -16,7 +16,7 @@
         <jackson.version>2.15.0</jackson.version>
         <lombok.version>1.18.28</lombok.version>
         <hibernate.version>6.2.4.Final</hibernate.version>
-        <postgresql.version>42.6.0</postgresql.version>
+        <postgresql.version>42.7.2</postgresql.version>
         <junit.version>5.9.1</junit.version>
         <hamcrest.version>2.0.0.0</hamcrest.version>
         <restassured.version>5.5.0</restassured.version>
@@ -180,7 +180,7 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.4.7</version>
+            <version>1.5.13</version>
         </dependency>
 
         <!--        <dependency>-->
@@ -191,7 +191,7 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
-            <version>1.4.7</version>
+            <version>1.5.13</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>

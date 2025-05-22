@@ -80,21 +80,22 @@ public class ApplicationConfig {
     }
 
     private static void setCorsHeaders(Context ctx) {
-        String requestOrigin = ctx.header("Origin"); // necessary because of the credentials: true when using cookies, then the * is not allowed
-        if(requestOrigin == null){
-            requestOrigin = "*";
-        }
-        Set<String> allowedOrigins = Set.of("http://localhost:5175"
-                , "http://localhost:5174"
-                , "http://localhost:5173"
-                , "https://tripapp.hartmanndemo.dk"
-        );
-        if (allowedOrigins.contains(requestOrigin)) {
-            ctx.header("Access-Control-Allow-Origin", requestOrigin);
+//        String requestOrigin = ctx.header("Origin"); // necessary because of the credentials: true when using cookies, then the * is not allowed
+//        if(requestOrigin == null){
+//            requestOrigin = "*";
+//        }
+//        Set<String> allowedOrigins = Set.of("http://localhost:5175"
+//                , "http://localhost:5174"
+//                , "http://localhost:5173"
+//                , "https://tripapp.hartmanndemo.dk"
+//        );
+//        if (allowedOrigins.contains(requestOrigin)) {
+//            ctx.header("Access-Control-Allow-Origin", requestOrigin);
+            ctx.header("Access-Control-Allow-Origin", "*");
             ctx.header("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE, OPTIONS");
             ctx.header("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Username");
             ctx.header("Access-Control-Allow-Credentials", "true"); // necessary for cookies
-        }
+//        }
     }
 
     // Adding below methods to ApplicationConfig, means that EVERY ROUTE will be checked for security roles. So open routes must have a role of ANYONE

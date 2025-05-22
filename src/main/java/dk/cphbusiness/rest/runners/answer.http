@@ -1,14 +1,14 @@
 POST {{url}}/auth/register
 
 {
-    "username": "samoht",
+    "username": "samoht2",
     "password": "test123"
 }
 ###
 POST {{url}}/auth/login
 
 {
-    "username": "samoht",k
+    "username": "samoht",
     "password": "test123"
 }
 > {%
@@ -186,6 +186,6 @@ Authorization: Bearer {{token}}
 }
 
 ### GET a class by name
-GET {{url}}/classes/TestClas
+GET {{url}}/classes/TestClass
 
 
