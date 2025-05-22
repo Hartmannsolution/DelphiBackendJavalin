@@ -18,6 +18,9 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
       -
+        name: Delete cached Maven repository
+        run: rm -rf ~/.m2/repository/ch/qos/logback
+      -
         name: Build with Maven
         run: mvn --batch-mode --update-snapshots package
       -
